@@ -1,0 +1,134 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: #022c22;
+  color: #e2e8f0;
+}
+
+/* Custom scrollbar — ocean/forest accent */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: #0f172a; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #06b6d4, #10b981);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, #22d3ee, #34d399); }
+
+@layer components {
+  /* ============== TYPOGRAPHY HELPERS ============== */
+  .section-badge {
+    @apply inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-semibold
+           bg-gradient-to-r from-forest-500/20 to-ocean-500/20
+           text-forest-200 ring-1 ring-forest-400/30 mb-4 backdrop-blur-sm;
+  }
+  .section-heading {
+    @apply text-3xl md:text-4xl lg:text-5xl font-black tracking-tight text-white mb-4;
+  }
+  .section-subheading {
+    @apply text-base md:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed;
+  }
+
+  /* ============== BUTTONS ============== */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full
+           bg-gradient-to-r from-forest-500 to-ocean-500
+           text-white font-bold shadow-lg shadow-forest-900/40
+           hover:shadow-ocean-400/40 active:scale-95
+           transition-all duration-200;
+  }
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full
+           border-2 border-white/30 text-white font-semibold
+           bg-white/5 hover:bg-white/15 backdrop-blur-md
+           active:scale-95 transition-all duration-200;
+  }
+  .btn-soft {
+    @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full
+           bg-white/10 text-white/90 border border-white/15 backdrop-blur-md
+           hover:bg-white/20 hover:border-white/30 active:scale-95
+           transition-all duration-200 text-sm font-semibold;
+  }
+
+  /* ============== CARDS ============== */
+  .card {
+    @apply rounded-2xl bg-white/10 backdrop-blur-xl border border-white/10
+           shadow-2xl shadow-black/20 transition-all duration-300;
+  }
+  .card-glass {
+    @apply rounded-3xl bg-white/10 backdrop-blur-2xl border border-white/20
+           shadow-2xl shadow-black/30;
+  }
+  .card-lift {
+    @apply transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl
+           hover:border-forest-400/40 hover:shadow-ocean-500/20;
+  }
+  .card-light {
+    @apply rounded-2xl bg-white shadow-lg border border-slate-100;
+  }
+
+  /* ============== FORMS ============== */
+  .input-field {
+    @apply w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20
+           text-white placeholder-white/40 backdrop-blur-md
+           focus:outline-none focus:ring-2 focus:ring-ocean-400
+           focus:border-transparent transition-all duration-200;
+  }
+  .label {
+    @apply block text-sm font-semibold text-slate-200 mb-1.5;
+  }
+
+  /* ============== GLASS PANELS ============== */
+  .glass {
+    @apply bg-white/10 backdrop-blur-2xl border border-white/15 shadow-2xl shadow-black/30;
+  }
+  .glass-deep {
+    @apply bg-slate-900/40 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/40;
+  }
+
+  /* ============== GRADIENT TEXT ============== */
+  .gradient-text {
+    background: linear-gradient(135deg, #6ee7b7 0%, #22d3ee 60%, #3b82f6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* ============== ACCENT DIVIDER ============== */
+  .accent-divider {
+    @apply h-1 w-20 rounded-full bg-gradient-to-r from-forest-400 via-ocean-400 to-deepsea-500 mx-auto;
+  }
+}
+
+/* ============== AMBIENT BACKGROUND BLOBS ============== */
+.blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(80px);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* Subtle film grain to keep flat backgrounds alive */
+.noise::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 3px 3px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Shimmer text utility */
+.shimmer-text {
+  background: linear-gradient(90deg, #67e8f9, #6ee7b7, #67e8f9);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s linear infinite;
+}

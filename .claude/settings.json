@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(findstr /R \"^framer-motion$ ^react$ ^vite$ ^tailwindcss$ ^lucide-react$\")",
+      "Bash(ls \"c:\\\\Users\\\\USER\\\\.claude\\\\projects\\\\c--Users-USER-Documents-KgBolokTourismWebsite\\\\memory\" 2>&1 | head -10)",
+      "Read(//c/Users/USER/.claude/projects/c--Users-USER-Documents-KgBolokTourismWebsite/memory/**)",
+      "Read(//c/Users/USER/Downloads/**)",
+      "PowerShell(Get-ChildItem -Path \"$env:USERPROFILE\\\\Downloads\" -Directory | Select-Object Name)",
+      "PowerShell(Get-ChildItem -Path \"$env:USERPROFILE\\\\Downloads\" | Format-Table Name, Mode -AutoSize)",
+      "PowerShell(Get-ChildItem -Path \"$env:USERPROFILE\\\\Downloads\\\\Kg Bolok Pictures\" -Recurse | Format-Table FullName -AutoSize)"
+    ]
+  }
+}
