@@ -1,2 +1,38 @@
-# kg-bolok-tourism
-Kg Bolok Tourism Website is a modern React + Vite tourism booking platform with attractions, homestays, and a custom package builder. Built for real-world use with planned Supabase database, HitPay payments, and admin dashboard for full tourism management system control.
+# Kg Bolok Tourism Website 🌿
+
+A modern tourism booking platform built with React, Vite, Tailwind CSS, and Framer Motion.  
+This project is designed as a real-world tourism management system with booking, package building, and future payment integration.
+
+---
+
+## 🚀 Features
+
+- Attraction listing system
+- Homestay browsing and selection
+- Custom travel package builder
+- Featured promotional packages with discounts
+- Responsive and animated UI (Framer Motion)
+- Multilingual-ready structure
+- Currency display system
+- Future admin dashboard support
+- Supabase backend integration (planned)
+- HitPay payment gateway integration (planned)
+
+---
+
+## 🛠️ Tech Stack
+
+- React + Vite
+- Tailwind CSS
+- Framer Motion
+- Node.js + Express (backend - future)
+- Supabase (database - future)
+- HitPay (payments - future)
+
+---
+
+## 📦 Installation
+
+```bash
+npm install
+npm run dev
