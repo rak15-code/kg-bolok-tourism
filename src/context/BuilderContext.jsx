@@ -31,6 +31,9 @@ const initial = {
   homestays: [],
   visitors: 2,
   days: 1,
+  // When set, the user picked a FEATURED package and pays its flat promo price.
+  // Any manual edit (add/remove attraction) clears it back to per-person pricing.
+  featuredPackage: null,
 }
 
 function loadInitial() {
@@ -62,13 +65,24 @@ export function BuilderProvider({ children }) {
       setState((s) =>
         s.attractions.some((a) => a.id === attraction.id)
           ? s
-          : { ...s, attractions: [...s.attractions, attraction] }
+          : { ...s, featuredPackage: null, attractions: [...s.attractions, attraction] }
       ),
 
     removeAttraction: (id) =>
       setState((s) => ({
         ...s,
+        featuredPackage: null, // editing breaks the flat promo price
         attractions: s.attractions.filter((a) => a.id !== id),
+      })),
+
+    // Load a featured package. `flat` keeps the promo price (Book This Package);
+    // false drops to per-person pricing for editing (Customize Instead).
+    loadPackage: (pkg, attractionObjects, { flat = true } = {}) =>
+      setState((s) => ({
+        ...s,
+        attractions: attractionObjects,
+        homestays: [],
+        featuredPackage: flat ? pkg : null,
       })),
 
     isAttractionAdded: (id) => state.attractions.some((a) => a.id === id),

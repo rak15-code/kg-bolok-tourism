@@ -2,49 +2,54 @@
 // AmbientBackground.jsx
 // ────────────────────────────────────────────────────────────────────────────
 // A fixed, layered background that lives behind every page:
-//   - deep eco gradient base
-//   - 4 animated colored blobs (subtle parallax)
-//   - a fine noise grid for texture
-// Designed to make sure NO section ever feels visually blank.
+//   0. deep eco gradient base (always present — also the fallback)
+//   1. GLOBAL website photo (/images/hero/web-bg.jpg) — heavily blurred,
+//      with a subtle parallax drift on scroll
+//   2. green + blue gradient overlay (premium eco-tourism tint)
+//   3. animated colour blobs + fine grain for depth
+//
+// ── DROP YOUR BACKGROUND PHOTO HERE ─────────────────────────────────────────
+//   public/images/hero/web-bg.jpg
+//   If the file is missing the eco gradient base shows through — nothing breaks.
+//
+// Text readability is protected: the photo is blurred + darkened by overlays,
+// and each page section adds its own translucent panel on top.
 // ────────────────────────────────────────────────────────────────────────────
 
-import { motion } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
+
+const BG_IMAGE = '/images/hero/web-bg.jpg'
 
 export default function AmbientBackground() {
+  // Whole-page scroll → gentle vertical parallax for the photo layer.
+  const { scrollY } = useScroll()
+  const photoY = useTransform(scrollY, [0, 1500], [0, 140])
+
   return (
     <div
       aria-hidden="true"
       className="fixed inset-0 pointer-events-none select-none overflow-hidden"
       style={{ zIndex: -10 }}
     >
-      {/* Base eco gradient */}
+      {/* 0. Base eco gradient (fallback if the photo is missing) */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#022c22] via-[#053b3b] to-[#0c1f47]" />
 
-      {/* Animated colour blobs */}
+      {/* 1. Global photo — softly blurred + parallax. Scaled up so the blur
+            edges and the parallax drift never reveal the viewport border. */}
       <motion.div
-        className="blob bg-forest-500"
-        style={{ width: 520, height: 520, top: '-10%', left: '-8%' }}
-        animate={{ x: [0, 40, -20, 0], y: [0, 30, -10, 0] }}
-        transition={{ duration: 22, repeat: Infinity, ease: 'easeInOut' }}
+        style={{
+          y: photoY,
+          backgroundImage: `url(${BG_IMAGE})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          filter: 'blur(14px) saturate(1.15)',
+          willChange: 'transform',
+        }}
+        className="absolute -inset-[8%]"
       />
-      <motion.div
-        className="blob bg-ocean-500"
-        style={{ width: 460, height: 460, top: '30%', right: '-12%' }}
-        animate={{ x: [0, -30, 20, 0], y: [0, 25, -15, 0] }}
-        transition={{ duration: 26, repeat: Infinity, ease: 'easeInOut' }}
-      />
-      <motion.div
-        className="blob bg-deepsea-500"
-        style={{ width: 520, height: 520, bottom: '-12%', left: '15%' }}
-        animate={{ x: [0, 30, -25, 0], y: [0, -20, 15, 0] }}
-        transition={{ duration: 28, repeat: Infinity, ease: 'easeInOut' }}
-      />
-      <motion.div
-        className="blob bg-forest-400"
-        style={{ width: 380, height: 380, top: '55%', right: '20%' }}
-        animate={{ x: [0, -20, 30, 0], y: [0, 10, -25, 0] }}
-        transition={{ duration: 30, repeat: Infinity, ease: 'easeInOut' }}
-      />
+
+      {/* No colour tint — just the blurred photo. Only a soft top vignette
+          keeps the navbar text readable. */}
 
       {/* Top vignette so the navbar text stays readable */}
       <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black/40 to-transparent" />

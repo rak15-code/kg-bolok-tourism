@@ -68,6 +68,25 @@ export function calculateTotal({ attractions = [], homestays = [], visitors = 1 
   };
 }
 
+// Flat pricing for a FEATURED package (promo price, not per-person math).
+// Used when a user clicks "Book This Package" — the price shown on the card
+// (e.g. RM149) is exactly what they pay.
+//   pkg: { originalPrice, discountedPrice, discountPercentage }
+export function getPackageTotals(pkg) {
+  const original = Number(pkg?.originalPrice || 0)
+  const discounted = Number(pkg?.discountedPrice || 0)
+  const discountAmount = Math.max(0, original - discounted)
+  const discountPercentage =
+    pkg?.discountPercentage ??
+    (original > 0 ? Math.round((discountAmount / original) * 100) : 0)
+  return {
+    subtotal: original,
+    discountAmount,
+    discountPercentage,
+    total: discounted,
+  }
+}
+
 // Base MYR formatter (used as fallback when no currency context is available).
 export const formatRM = (n) =>
   "RM " + Number(n || 0).toLocaleString("en-MY", { maximumFractionDigits: 0 });

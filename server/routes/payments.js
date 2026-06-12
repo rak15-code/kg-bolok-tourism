@@ -1,20 +1,26 @@
 // ────────────────────────────────────────────────────────────────────────────
-// routes/payments.js — express router mounted at /api/payments
+// routes/payments.js — mounted at /api/payments
 // ────────────────────────────────────────────────────────────────────────────
 
 import { Router } from 'express'
-import { createPayment, handleWebhook } from '../controllers/paymentsController.js'
+import {
+  createPayment, handleWebhook, mockComplete,
+} from '../controllers/paymentsController.js'
 
 const router = Router()
 
 // POST /api/payments/create
-//   Body: { customer, booking, total, currency, lang }
-//   → returns { url, reference }
+//   Body: { customer, booking, total, subtotal, discountPercentage, currency, lang }
+//   → { url, reference, providerReference, status }
 router.post('/create', createPayment)
 
+// GET /api/payments/mock/complete   (Mock provider only)
+//   The fake gateway "finishes" the payment, then redirects to the success page.
+router.get('/mock/complete', mockComplete)
+
 // POST /api/payments/webhook
-//   HitPay calls this server-to-server when a payment is completed.
-//   We verify the HMAC signature, then could persist to a DB, send email, etc.
+//   The gateway calls this server-to-server when a payment completes/fails.
+//   We verify the signature, then update the booking + send confirmation email.
 router.post('/webhook', handleWebhook)
 
 export default router

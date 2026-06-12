@@ -15,6 +15,7 @@ import { Outlet, useLocation } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import AmbientBackground from '../components/AmbientBackground'
+import AiAssistant from '../components/AiAssistant'
 
 export default function MainLayout() {
   const { pathname } = useLocation()
@@ -32,6 +33,7 @@ export default function MainLayout() {
         <Outlet />
       </main>
       <Footer />
+      <AiAssistant />
     </div>
   )
 }

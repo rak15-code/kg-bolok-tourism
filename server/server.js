@@ -1,70 +1,94 @@
 // ────────────────────────────────────────────────────────────────────────────
-// server.js — Express entrypoint.
+// server.js — Express entrypoint (Render-ready).
 //
-// Run locally:
-//   1) cd server && cp .env.example .env  (fill in HitPay sandbox keys)
-//   2) npm install
-//   3) npm run dev      (auto-reload) or  npm start
+// Local:
+//   cd server && cp .env.example .env   # mock works with no extra keys
+//   npm install && npm run dev
 //
-// The frontend reads VITE_API_BASE_URL from its own .env to know where to talk.
+// Production (Render): set env vars in the dashboard; start command `npm start`.
 // ────────────────────────────────────────────────────────────────────────────
 
 import express from 'express'
 import cors    from 'cors'
-import dotenv  from 'dotenv'
 
+import { validateEnv, allowedOrigins } from './config/env.js'
+import logger        from './middleware/logger.js'
+import errorHandler  from './middleware/errorHandler.js'
 import paymentsRouter from './routes/payments.js'
-import errorHandler   from './middleware/errorHandler.js'
+import aiRouter from './routes/ai.js'
+import paymentProvider from './services/payments/paymentProvider.js'
+import { isSupabaseReady } from './services/supabaseClient.js'
+import emailProvider from './services/email/emailProvider.js'
+import { isAiReady, providerName, modelName } from './services/ai/aiProvider.js'
 
-dotenv.config()
+const { provider, isProd } = validateEnv()
 
 const app = express()
 const PORT = process.env.PORT || 5000
 
-// Lock CORS to the dev frontend by default; widen for production via env.
+app.set('trust proxy', 1) // Render/other proxies — correct req.protocol for redirects
+
+// ── CORS (allow-list, supports multiple comma-separated origins) ──
+const origins = allowedOrigins()
 app.use(cors({
-  origin: process.env.ALLOWED_ORIGIN || 'http://localhost:5173',
+  origin(origin, cb) {
+    // allow same-origin / curl / server-to-server (no Origin header)
+    if (!origin || origins.includes(origin)) return cb(null, true)
+    return cb(new Error(`CORS: origin ${origin} not allowed`))
+  },
   methods: ['GET', 'POST'],
 }))
 
+// ── Body parsing — JSON for our API, urlencoded for HitPay's webhook ──
 app.use(express.json({ limit: '256kb' }))
+app.use(express.urlencoded({ extended: false, limit: '256kb' }))
 
-// Friendly root — confirms the API is up if you hit it in a browser.
+app.use(logger)
+
+// ── Health probe (Render health check → GET /health) ──
+function health(_req, res) {
+  res.json({
+    status: 'ok',
+    name: 'Kg Bolok Tourism API',
+    uptime: Math.round(process.uptime()),
+    timestamp: new Date().toISOString(),
+    env: isProd ? 'production' : 'development',
+    paymentProvider: paymentProvider.name,
+    emailProvider: emailProvider.name,
+    database: isSupabaseReady() ? 'connected' : 'disabled',
+    ai: isAiReady() ? `enabled (${providerName}/${modelName})` : 'disabled',
+  })
+}
+app.get('/health', health)
+app.get('/api/health', health)
+
+// ── Friendly root ──
 app.get('/', (_req, res) => {
   res.json({
     name: 'Kg Bolok Tourism API',
     status: 'running',
-    note: 'This is a JSON API, not a website. The website runs on Vite (default :5173).',
     endpoints: {
-      health:           'GET  /api/health',
-      createPayment:    'POST /api/payments/create',
-      hitpayWebhook:    'POST /api/payments/webhook',
+      health:        'GET  /health',
+      createPayment: 'POST /api/payments/create',
+      webhook:       'POST /api/payments/webhook',
     },
   })
 })
 
-// Health probe
-app.get('/api/health', (_req, res) => {
-  res.json({ ok: true, name: 'Kg Bolok Tourism API', ts: Date.now() })
-})
-
-// Mount payment routes
+// ── Routes ──
 app.use('/api/payments', paymentsRouter)
+app.use('/api/ai', aiRouter)
 
-// JSON 404 for any unknown path (instead of the default "Cannot GET /...")
+// ── JSON 404 ──
 app.use((req, res) => {
-  res.status(404).json({
-    error: 'Not Found',
-    method: req.method,
-    path: req.originalUrl,
-  })
+  res.status(404).json({ error: 'Not Found', method: req.method, path: req.originalUrl })
 })
 
-// Unified error handler (last)
+// ── Unified error handler (last) ──
 app.use(errorHandler)
 
 app.listen(PORT, () => {
-  console.log(`\n🌿  Kg Bolok backend running on http://localhost:${PORT}`)
-  console.log(`    CORS origin: ${process.env.ALLOWED_ORIGIN || 'http://localhost:5173'}`)
-  console.log(`    HitPay base: ${process.env.HITPAY_API_BASE || '(unset — using sandbox default)'}\n`)
+  console.log(`\n🌿  Kg Bolok backend on :${PORT}  [${isProd ? 'production' : 'development'}]`)
+  console.log(`    payments: ${provider}  ·  db: ${isSupabaseReady() ? 'on' : 'off'}  ·  email: ${emailProvider.name}  ·  ai: ${isAiReady() ? 'on' : 'off'}`)
+  console.log(`    CORS: ${origins.join(', ')}\n`)
 })

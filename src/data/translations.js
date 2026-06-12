@@ -36,30 +36,25 @@ const translations = {
     },
 
     about: {
-      sectionBadge: "About Us",
-      heading: "A Village Alive with Culture & Nature",
+      sectionBadge: "Why Visit Us",
+      heading: "Discover the Hidden Gems of Kampung Bolok",
       intro:
-        "Nestled in the lush greenery of Pahang, Kg Bolok is a traditional Malay village offering an authentic glimpse into Malaysia's rich heritage and breathtaking natural beauty.",
-      card1Title: "Rich Nature",
-      card1Desc:
-        "Tropical forests, rivers, and diverse wildlife — including elephants and deer — a paradise for nature lovers.",
-      card2Title: "Living Culture",
-      card2Desc:
-        "Tarian Piring performances, bahulu-making, and centuries-old Malay customs you can experience in person.",
-      card3Title: "Warm Community",
-      card3Desc:
-        "Our villagers welcome you like family. Honest conversations and genuine Malaysian hospitality await.",
-      card4Title: "Traditional Food",
-      card4Desc:
-        "Mee Bandung, dodol, tapai pulut, bahulu and many traditional kampung recipes passed down through generations.",
-      highlight1: "Comfortable Homestays",
-      highlight1Desc: "Optional kampung-style stays with full amenities",
-      highlight2: "Wildlife Encounters",
-      highlight2Desc: "Up-close experiences with elephants and deer",
-      highlight3: "Cultural Performances",
-      highlight3Desc: "Tarian Piring, Silat and other live showcases",
-      highlight4: "Local Cuisine",
-      highlight4Desc: "Bahulu, dodol, tapai pulut, lemang and more",
+        "Just about 100 km from Kuala Lumpur, Kampung Bolok offers a peaceful countryside escape surrounded by forests, rivers and living Malay heritage — close to the city, yet a world away.",
+      why1Title: "Only ~100 km from Kuala Lumpur",
+      why1Desc:
+        "Close to the city, yet a peaceful countryside experience surrounded by forests, rivers and greenery.",
+      why2Title: "15 Minutes from Kuala Gandah Elephant Centre",
+      why2Desc:
+        "Right beside the famous elephant conservation centre — an ideal stop for visitors who love wildlife tourism.",
+      why3Title: "Living Cultural Performances",
+      why3Desc:
+        "Experience Tarian Piring, Silat and Sewang performances still actively practised — a village rich in living heritage.",
+      why4Title: "Treasured Traditional Foods",
+      why4Desc:
+        "Locals preserve recipes like halwa, lempeng and dodol — and even serve unique deer-based kampung dishes.",
+      why5Title: "Surrounded by Natural Attractions",
+      why5Desc:
+        "Air Terjun Nerin & Lengit waterfalls, Deerland, an Orang Asli village and the elephant centre are all close by.",
     },
 
     attractions: {
@@ -144,6 +139,51 @@ const translations = {
       noHomestaySelected: "No homestay selected — day-trip package",
     },
 
+    featuredPackages: {
+      sectionBadge: "Best Value",
+      heading: "Featured Packages",
+      subheading:
+        "Ready-made bundles at a special price. Book in one tap, or customize them to make them your own.",
+      only: "ONLY",
+      save: "Save",
+      book: "Book This Package",
+      customize: "Customize Instead",
+    },
+
+    smartTourism: {
+      sectionBadge: "Kampung Bolok Smart Tourism",
+      heading: "Experience Kampung Bolok, Smarter",
+      subheading:
+        "Watch our village come alive on screen, then let our AI companion help you plan the perfect visit.",
+      videoTitle: "Meet Kampung Bolok",
+      playLabel: "Show video",
+      closeLabel: "Close video",
+      muteLabel: "Mute",
+      unmuteLabel: "Unmute",
+      prevLabel: "Previous video",
+      nextLabel: "Next video",
+      videoComingSoon: "This video is coming soon — check back shortly!",
+      aiPromoTag: "AI Travel Companion",
+      aiPromoHeading: "Need help planning your visit?",
+      aiPromoText:
+        "Chat with Sahabat Bolok AI — your friendly bilingual guide for attractions, prices, homestays and ready-made packages.",
+      aiPromoCta: "Chat with Sahabat Bolok AI",
+    },
+
+    ai: {
+      // Assistant widget
+      assistantTitle: "Sahabat Bolok AI",
+      assistantTagline: "Your friendly Kampung Bolok guide",
+      openLabel: "Chat with Sahabat Bolok AI",
+      greeting: "Hi! I'm Sahabat Bolok AI, your friendly Kampung Bolok travel companion. Ask me about attractions, prices, homestays, or let me suggest a package for you.",
+      placeholder: "Ask anything about your trip...",
+      send: "Send",
+      clear: "Clear chat",
+      thinking: "Thinking...",
+      error: "Sorry, the assistant is unavailable right now. Please try again later.",
+      poweredBy: "AI can make mistakes — please verify important details.",
+    },
+
     payment: {
       heading: "Secure Checkout",
       subheading: "You'll be redirected to HitPay's secure payment page.",
@@ -171,6 +211,10 @@ const translations = {
       cancelMessage:
         "Your payment was cancelled and no charges were made. Your package is still saved — feel free to try again.",
       cancelRetry: "Return to Checkout",
+      failedTitle: "Payment Failed",
+      failedMessage:
+        "We couldn't complete your payment. No charges were made. Your package is still saved — please try again.",
+      failedRetry: "Try Again",
     },
 
     gallery: {
@@ -255,30 +299,25 @@ const translations = {
     },
 
     about: {
-      sectionBadge: "Tentang Kami",
-      heading: "Kampung yang Hidup dengan Budaya & Alam",
+      sectionBadge: "Mengapa Lawati Kami",
+      heading: "Temui Permata Tersembunyi Kampung Bolok",
       intro:
-        "Terletak di tengah kehijauan Pahang, Kg Bolok adalah sebuah kampung Melayu tradisional yang menawarkan pandangan autentik warisan Malaysia.",
-      card1Title: "Alam Semula Jadi",
-      card1Desc:
-        "Hutan tropika, sungai, dan hidupan liar — termasuk gajah dan rusa — syurga untuk pencinta alam.",
-      card2Title: "Budaya Hidup",
-      card2Desc:
-        "Persembahan Tarian Piring, pembuatan bahulu, dan adat Melayu berabad lamanya untuk anda rasai sendiri.",
-      card3Title: "Komuniti Mesra",
-      card3Desc:
-        "Penduduk kampung menyambut anda seperti keluarga. Perbualan jujur dan keramahan Malaysia menanti.",
-      card4Title: "Makanan Tradisional",
-      card4Desc:
-        "Mee Bandung, dodol, tapai pulut, bahulu dan banyak lagi resipi kampung yang diwarisi turun-temurun.",
-      highlight1: "Homestay Selesa",
-      highlight1Desc: "Pilihan penginapan kampung dengan kemudahan lengkap",
-      highlight2: "Pengalaman Hidupan Liar",
-      highlight2Desc: "Pengalaman rapat dengan gajah dan rusa",
-      highlight3: "Persembahan Budaya",
-      highlight3Desc: "Tarian Piring, Silat dan pameran tradisional langsung",
-      highlight4: "Masakan Tempatan",
-      highlight4Desc: "Bahulu, dodol, tapai pulut, lemang dan lagi",
+        "Hanya kira-kira 100 km dari Kuala Lumpur, Kampung Bolok menawarkan ketenangan desa yang dikelilingi hutan, sungai dan warisan Melayu yang masih hidup — hampir dengan bandar, namun jauh dari kesibukan.",
+      why1Title: "Hanya ~100 km dari Kuala Lumpur",
+      why1Desc:
+        "Hampir dengan bandar, namun menawarkan pengalaman desa yang tenang dikelilingi hutan, sungai dan kehijauan.",
+      why2Title: "15 Minit dari Pusat Gajah Kuala Gandah",
+      why2Desc:
+        "Bersebelahan pusat pemuliharaan gajah yang terkenal — persinggahan ideal untuk pencinta pelancongan hidupan liar.",
+      why3Title: "Persembahan Budaya yang Masih Hidup",
+      why3Desc:
+        "Saksikan Tarian Piring, Silat dan Sewang yang masih diamalkan secara aktif — sebuah kampung kaya dengan warisan hidup.",
+      why4Title: "Makanan Tradisional yang Dihargai",
+      why4Desc:
+        "Penduduk mengekalkan resipi seperti halwa, lempeng dan dodol — malah menghidangkan masakan kampung berasaskan rusa yang unik.",
+      why5Title: "Dikelilingi Tarikan Semula Jadi",
+      why5Desc:
+        "Air Terjun Nerin & Lengit, Deerland, perkampungan Orang Asli dan pusat gajah semuanya berdekatan.",
     },
 
     attractions: {
@@ -363,6 +402,51 @@ const translations = {
       noHomestaySelected: "Tiada homestay dipilih — pakej lawatan sehari",
     },
 
+    featuredPackages: {
+      sectionBadge: "Nilai Terbaik",
+      heading: "Pakej Pilihan",
+      subheading:
+        "Pakej siap pada harga istimewa. Tempah dengan satu ketik, atau sesuaikan mengikut citarasa anda.",
+      only: "HANYA",
+      save: "Jimat",
+      book: "Tempah Pakej Ini",
+      customize: "Sesuaikan Sebaliknya",
+    },
+
+    smartTourism: {
+      sectionBadge: "Pelancongan Pintar Kampung Bolok",
+      heading: "Alami Kampung Bolok, Lebih Pintar",
+      subheading:
+        "Saksikan kampung kami hidup di skrin, kemudian biar teman AI kami membantu anda merancang lawatan yang sempurna.",
+      videoTitle: "Kenali Kampung Bolok",
+      playLabel: "Tunjuk video",
+      closeLabel: "Tutup video",
+      muteLabel: "Senyapkan",
+      unmuteLabel: "Nyahsenyap",
+      prevLabel: "Video sebelumnya",
+      nextLabel: "Video seterusnya",
+      videoComingSoon: "Video ini akan datang tidak lama lagi — sila semak semula nanti!",
+      aiPromoTag: "Teman Perjalanan AI",
+      aiPromoHeading: "Perlukan bantuan merancang lawatan anda?",
+      aiPromoText:
+        "Sembang dengan Sahabat Bolok AI — pemandu dwibahasa mesra anda untuk tarikan, harga, homestay dan pakej siap.",
+      aiPromoCta: "Sembang dengan Sahabat Bolok AI",
+    },
+
+    ai: {
+      // Pembantu AI
+      assistantTitle: "Sahabat Bolok AI",
+      assistantTagline: "Pemandu mesra Kampung Bolok anda",
+      openLabel: "Sembang dengan Sahabat Bolok AI",
+      greeting: "Hai! Saya Sahabat Bolok AI, teman perjalanan mesra Kampung Bolok anda. Tanya saya tentang tarikan, harga, homestay, atau biar saya cadangkan pakej untuk anda.",
+      placeholder: "Tanya apa-apa tentang perjalanan anda...",
+      send: "Hantar",
+      clear: "Kosongkan sembang",
+      thinking: "Sedang berfikir...",
+      error: "Maaf, pembantu tidak tersedia buat masa ini. Sila cuba sebentar lagi.",
+      poweredBy: "AI mungkin tersilap — sila sahkan butiran penting.",
+    },
+
     payment: {
       heading: "Pembayaran Selamat",
       subheading: "Anda akan dialihkan ke halaman pembayaran HitPay yang selamat.",
@@ -390,6 +474,10 @@ const translations = {
       cancelMessage:
         "Pembayaran anda dibatalkan dan tiada caj dikenakan. Pakej anda masih disimpan — cuba lagi bila-bila.",
       cancelRetry: "Kembali ke Pembayaran",
+      failedTitle: "Pembayaran Gagal",
+      failedMessage:
+        "Kami tidak dapat melengkapkan pembayaran anda. Tiada caj dikenakan. Pakej anda masih disimpan — sila cuba lagi.",
+      failedRetry: "Cuba Lagi",
     },
 
     gallery: {

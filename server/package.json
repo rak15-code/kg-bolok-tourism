@@ -1,17 +1,28 @@
 {
   "name": "kgbolok-tourism-server",
   "version": "1.0.0",
-  "description": "Backend for Kg Bolok Tourism — HitPay payment proxy",
+  "description": "Backend for Kg Bolok Tourism — payments (adapter), bookings, email",
   "type": "module",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev":   "node --watch server.js"
+    "dev": "node --watch server.js",
+    "seed": "node db/seed.js"
+  },
+  "engines": {
+    "node": ">=18"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.102.0",
+    "@google/genai": "^2.8.0",
+    "@supabase/supabase-js": "^2.107.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
-    "node-fetch": "^3.3.2"
+    "node-fetch": "^3.3.2",
+    "resend": "^6.12.4"
+  },
+  "devDependencies": {
+    "vite": "^8.0.16"
   }
 }

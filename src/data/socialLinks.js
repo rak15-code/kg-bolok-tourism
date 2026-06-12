@@ -9,10 +9,10 @@
 
 export const socialLinks = {
   // 👇 REPLACE THIS: paste your real Instagram URL
-  instagram: "https://instagram.com/YOUR_INSTAGRAM_USERNAME",
+  instagram: "https://instagram.com/transformers_of_t",
 
   // 👇 REPLACE THIS: paste your real TikTok URL
-  tiktok: "https://www.tiktok.com/@YOUR_TIKTOK_USERNAME",
+  tiktok: "https://www.tiktok.com/@transformers.of.t",
 };
 
 // Contact phone — used by Contact section and Footer.

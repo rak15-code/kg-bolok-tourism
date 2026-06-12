@@ -22,6 +22,8 @@ import {
 } from 'lucide-react'
 import Hero from '../components/Hero'
 import About from '../components/About'
+import SmartTourism from '../components/SmartTourism'
+import FeaturedPackages from '../components/FeaturedPackages'
 import GalleryCarousel from '../components/GalleryCarousel'
 import attractions from '../data/attractionsData'
 import homestays from '../data/homestaysData'
@@ -52,8 +54,14 @@ export default function HomePage() {
       {/* SECTION: HOME (Hero already has id="home") */}
       <Hero />
 
+      {/* SECTION: FEATURED PACKAGES — promo bundles, right after the home/hero */}
+      <FeaturedPackages />
+
       {/* SECTION: ABOUT (id="about" baked in) */}
       <About />
+
+      {/* SECTION: SMART TOURISM — video showcase + Sahabat Bolok AI + features */}
+      <SmartTourism />
 
       {/* SECTION: ATTRACTIONS — teaser grid */}
       <section id="attractions" className="relative py-20 lg:py-24 overflow-hidden scroll-mt-24">
@@ -196,7 +204,7 @@ export default function HomePage() {
 
       {/* SECTION: PACKAGE BUILDER — teaser + CTA */}
       <section id="builder" className="relative py-20 lg:py-24 overflow-hidden scroll-mt-24">
-        <div className="absolute inset-0 bg-gradient-to-br from-forest-700/60 via-ocean-700/50 to-deepsea-700/60" />
+        <div className="absolute inset-0 bg-slate-950/50" />
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}

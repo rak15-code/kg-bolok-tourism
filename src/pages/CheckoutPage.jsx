@@ -14,7 +14,7 @@ import {
 import { useLanguage } from '../context/LanguageContext'
 import { useBuilder } from '../context/BuilderContext'
 import { useCurrency } from '../context/CurrencyContext'
-import { calculateTotal } from '../utils/pricing'
+import { calculateTotal, getPackageTotals } from '../utils/pricing'
 import { createPayment } from '../services/paymentService'
 import MotionHeading from '../components/ui/MotionHeading'
 
@@ -22,9 +22,16 @@ export default function CheckoutPage() {
   const { t, lang } = useLanguage()
   const p = t.payment
   const navigate = useNavigate()
-  const { attractions, homestays, visitors, days } = useBuilder()
+  const { attractions, homestays, visitors, days, featuredPackage } = useBuilder()
   const { format } = useCurrency()
-  const totals = calculateTotal({ attractions, homestays, visitors })
+
+  // Featured packages pay their flat promo price; everything else is per-person.
+  const totals = featuredPackage
+    ? getPackageTotals(featuredPackage)
+    : calculateTotal({ attractions, homestays, visitors })
+  const discountPct = featuredPackage
+    ? totals.discountPercentage
+    : Math.round(totals.discountTier.rate * 100)
 
   const [form, setForm] = useState({
     name: '', email: '', phone: '', startDate: '', request: '',
@@ -61,8 +68,11 @@ export default function CheckoutPage() {
           request: form.request,
         },
         total: totals.total,
+        subtotal: totals.subtotal,
+        discountPercentage: discountPct,
         currency: 'MYR',
         lang,
+        featuredPackage: featuredPackage?.slug || null,
       }
       const { url } = await createPayment(payload)
       window.location.assign(url)
@@ -202,6 +212,13 @@ export default function CheckoutPage() {
             <div className="card-glass p-6 sticky top-28">
               <h2 className="text-white font-bold text-lg mb-4">{p.orderTitle}</h2>
 
+              {featuredPackage && (
+                <div className="mb-4 px-3 py-2 rounded-xl bg-gradient-to-r from-forest-500/15 to-ocean-500/15
+                                border border-forest-400/30 text-sm font-bold text-forest-200">
+                  ★ {featuredPackage[lang]?.title || featuredPackage.en?.title}
+                </div>
+              )}
+
               {attractions.length > 0 && (
                 <div className="mb-4">
                   <p className="text-[10px] uppercase tracking-wider text-forest-300 font-bold mb-2">
@@ -210,8 +227,12 @@ export default function CheckoutPage() {
                   <ul className="space-y-1.5">
                     {attractions.map((a) => (
                       <li key={a.id} className="flex justify-between text-sm text-slate-200">
-                        <span className="truncate pr-2">{a[lang].name} × {visitors}</span>
-                        <span className="shrink-0">{format(a.price * visitors)}</span>
+                        <span className="truncate pr-2">
+                          {a[lang].name}{!featuredPackage && ` × ${visitors}`}
+                        </span>
+                        {!featuredPackage && (
+                          <span className="shrink-0">{format(a.price * visitors)}</span>
+                        )}
                       </li>
                     ))}
                   </ul>
@@ -243,7 +264,7 @@ export default function CheckoutPage() {
                 </div>
                 {totals.discountAmount > 0 && (
                   <div className="flex justify-between text-forest-300">
-                    <span>{t.builder.discount} ({Math.round(totals.discountTier.rate * 100)}%)</span>
+                    <span>{t.builder.discount} ({discountPct}%)</span>
                     <span>- {format(totals.discountAmount)}</span>
                   </div>
                 )}
